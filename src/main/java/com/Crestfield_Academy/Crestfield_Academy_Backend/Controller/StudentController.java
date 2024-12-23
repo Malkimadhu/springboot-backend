@@ -5,20 +5,32 @@ import com.Crestfield_Academy.Crestfield_Academy_Backend.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-@RequestMapping("api/v1/user")
+import java.util.List;
+
+@RequestMapping("api/v1/students")
 @RestController
 @CrossOrigin
-public class UserController {
+public class StudentController {
 
     @Autowired
     private StudentService studentService;
-    @GetMapping(value = "/getUser")
-    public String getUser(){
-        return "Hi Malki";
+
+
+    @GetMapping(value = "/getStudents")
+    public List<StudentDto> getUser(){
+
+        return studentService.getAllStudents();
     }
 
     @PostMapping(value = "/saveStudent")
     public StudentDto saveStudent(@RequestBody StudentDto studentDto){
         return studentService.StudentSave(studentDto);
+
+    }
+
+    @PutMapping(value = "/updateStudent")
+    public StudentDto updateStudent(@RequestBody StudentDto studentDto){
+        return studentService.updateStudent(studentDto);
+
     }
 }
