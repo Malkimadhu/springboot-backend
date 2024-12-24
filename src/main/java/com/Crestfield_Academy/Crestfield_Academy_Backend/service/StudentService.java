@@ -34,4 +34,14 @@ public class StudentService {
         studentRepo.save(modelMapper.map(studentDto,Student.class));
         return studentDto;
     }
+
+    public  boolean deleteStudent(StudentDto studentDto){
+        if(studentDto!=null){
+            studentRepo.delete(modelMapper.map(studentDto,Student.class));
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
 }

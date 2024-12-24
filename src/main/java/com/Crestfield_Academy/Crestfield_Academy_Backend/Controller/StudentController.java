@@ -33,4 +33,10 @@ public class StudentController {
         return studentService.updateStudent(studentDto);
 
     }
+
+    @DeleteMapping(value = "/deleteStudent")
+    public boolean deleteStudent(@RequestBody StudentDto studentDto){
+        return studentService.deleteStudent(studentDto);
+
+    }
 }
