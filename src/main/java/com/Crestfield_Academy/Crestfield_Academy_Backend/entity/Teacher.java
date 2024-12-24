@@ -1,8 +1,14 @@
-package com.Crestfield_Academy.Crestfield_Academy_Backend.dto;
+package com.Crestfield_Academy.Crestfield_Academy_Backend.entity;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
-
-public class StudentDto {
+@Entity
+public class Teacher {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
     private String address;
@@ -11,11 +17,11 @@ public class StudentDto {
     private String email;
     private String password;
 
-    public StudentDto() {
+    public Teacher() {
     }
 
     // All-argument constructor
-    public StudentDto(int id, String name, String address, String phone, int age, String email, String password) {
+    public Teacher(int id, String name, String address, String phone, int age, String email, String password) {
         this.id = id;
         this.name = name;
         this.address = address;
@@ -28,7 +34,6 @@ public class StudentDto {
     public int getId() {
         return id;
     }
-
     public String getName() {
         return name;
     }
@@ -48,7 +53,6 @@ public class StudentDto {
         return password;
     }
 
-
     public void setId(int id) {
         this.id = id;
     }
@@ -61,7 +65,6 @@ public class StudentDto {
     public void setPhone(String phone) {
         this.phone = phone;
     }
-
     public void setEmail(String email) {
         this.email = email;
     }
@@ -71,5 +74,4 @@ public class StudentDto {
     public void setPassword(String password) {
         this.password = password;
     }
-
 }

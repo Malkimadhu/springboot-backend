@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RequestMapping("api/v1/students")
 @RestController
@@ -24,6 +25,8 @@ public class StudentController {
 
     @PostMapping(value = "/saveStudent")
     public StudentDto saveStudent(@RequestBody StudentDto studentDto){
+        String pass = studentDto.getPassword();
+        System.out.println(pass);
         return studentService.StudentSave(studentDto);
 
     }
@@ -39,4 +42,17 @@ public class StudentController {
         return studentService.deleteStudent(studentDto);
 
     }
+
+    @GetMapping("/getStudentById/{id}")
+    public StudentDto getStudentById(@PathVariable int id){
+        return studentService.getStudentById(id);
+    }
+
+    @PostMapping("/login")
+    public String login(@RequestBody Map<String, String> loginData) {
+        String email = loginData.get("email");
+        String password = loginData.get("password");
+        return studentService.login(email, password);
+    }
+
 }

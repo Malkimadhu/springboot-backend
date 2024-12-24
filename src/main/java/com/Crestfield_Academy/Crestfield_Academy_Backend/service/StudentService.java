@@ -44,4 +44,28 @@ public class StudentService {
             return false;
         }
     }
+
+    public StudentDto getStudentById(int id){
+        Student student = studentRepo.getStudentsById(id);
+        return modelMapper.map(student,StudentDto.class);
+    }
+
+    public String login(String email, String password) {
+        if (email == null || password == null) {
+            throw new RuntimeException("Email or password is missing.");
+        }
+
+        Student student = studentRepo.findByEmail(email);
+
+        if (student == null) {
+            throw new RuntimeException("No account found with the given email.");
+        }
+
+        if (student.getPassword().equals(password)) {
+            return "Login successful!";
+        } else {
+            throw new RuntimeException("Incorrect password.");
+        }
+    }
+
 }
