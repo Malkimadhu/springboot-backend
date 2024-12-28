@@ -14,6 +14,9 @@ import java.util.List;
 @Service
 @Transactional
 public class StudentService {
+    private static final String SECRET_KEY = "your-secret-key";
+    private static final long EXPIRATION_TIME = 7 * 24 * 60 * 60 * 1000;
+
     @Autowired
     private StudentRepo studentRepo;
 
@@ -50,7 +53,7 @@ public class StudentService {
         return modelMapper.map(student,StudentDto.class);
     }
 
-    public String login(String email, String password) {
+    public StudentDto login(String email, String password) {
         if (email == null || password == null) {
             throw new RuntimeException("Email or password is missing.");
         }
@@ -62,7 +65,15 @@ public class StudentService {
         }
 
         if (student.getPassword().equals(password)) {
-            return "Login successful!";
+            //return "Login successful!";
+            StudentDto std = new StudentDto();
+            std.setEmail(student.getEmail());
+            std.setName(student.getName());
+            std.setAddress(student.getAddress());
+            std.setId(student.getId());
+            std.setPhone(student.getPhone());
+            std.setAge(student.getAge());
+            return std;
         } else {
             throw new RuntimeException("Incorrect password.");
         }

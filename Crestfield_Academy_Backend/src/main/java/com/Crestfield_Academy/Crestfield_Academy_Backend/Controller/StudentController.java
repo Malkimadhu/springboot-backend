@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("api/v1/students")
 @RestController
-@CrossOrigin
 public class StudentController {
 
     @Autowired
@@ -49,7 +49,7 @@ public class StudentController {
     }
 
     @PostMapping("/login")
-    public String login(@RequestBody Map<String, String> loginData) {
+    public StudentDto login(@RequestBody Map<String, String> loginData) {
         String email = loginData.get("email");
         String password = loginData.get("password");
         return studentService.login(email, password);
