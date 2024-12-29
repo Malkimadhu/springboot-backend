@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -34,7 +35,13 @@ public class StudentService {
     }
 
     public StudentDto updateStudent(StudentDto studentDto){
-        studentRepo.save(modelMapper.map(studentDto,Student.class));
+        Student student = studentRepo.findById(studentDto.getId());
+        student.setName(studentDto.getName());
+        student.setAddress(studentDto.getAddress());
+        student.setEmail(studentDto.getEmail());
+        student.setPhone(studentDto.getPhone());
+        student.setAge(studentDto.getAge());
+        studentRepo.save(student);
         return studentDto;
     }
 
